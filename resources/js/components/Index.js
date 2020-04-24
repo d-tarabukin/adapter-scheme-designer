@@ -87,8 +87,7 @@ export function SchemeDesignerForm() {
     function addSettingsProperty({name, types, options, defaultValue}) {
         if (settingsProperties.find(property => property.name === name)) return;
 
-        setSettingsProperties(
-            [
+        setSettingsProperties([
                 ...settingsProperties,
                 {
                     name: name,
@@ -146,8 +145,7 @@ export function SchemeDesignerForm() {
     function addVendor({name, version}) {
         if (vendors.find(vendor => vendor.name === name)) return;
 
-        setVendors(
-            [
+        setVendors([
                 ...vendors,
                 {
                     name: name,
