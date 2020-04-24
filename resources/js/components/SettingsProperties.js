@@ -7,15 +7,19 @@ export default function SettingsProperties({settingsProperties, onRemoveSettings
             {settingsProperties.map(property => (
                 <div key={uuid()}>
                     <ul className="property-group">
-                        <li><h5>{property.name}</h5> <button className="btn btn-danger" onClick={() => onRemoveSettingsProperty(property.name)}>X</button></li>
+                        <li><h5>{property.name}</h5>
+                            <button className="btn btn-danger"
+                                    onClick={() => onRemoveSettingsProperty(property.name)}>X
+                            </button>
+                        </li>
                         {property.type &&
-                            <li>Type: {property.type.replace(/,/g, '|')}</li>
+                        <li>Type: {property.type.replace(/,/g, '|')}</li>
                         }
                         {property.options.length > 0 &&
-                            <li>Options: [{property.options.join(', ')}]</li>
+                        <li>Options: [{property.options.join(', ')}]</li>
                         }
                         {property.default &&
-                            <li>Default: {property.default}</li>
+                        <li>Default: {property.default}</li>
                         }
                     </ul>
                 </div>

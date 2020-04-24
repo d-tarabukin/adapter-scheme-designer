@@ -95,8 +95,8 @@ export function SchemeDesignerForm() {
                     type: types.join(),
                     options: options,
                     default: defaultValue
-                }]
-        );
+                }
+            ]);
     }
 
     function addRoute({uri, method, className, response}) {
@@ -111,7 +111,7 @@ export function SchemeDesignerForm() {
                 className: className,
                 response: response
             }
-        ])
+        ]);
     }
 
     function addExRoute({uri, method, className, response}) {
@@ -126,7 +126,7 @@ export function SchemeDesignerForm() {
                 className: className,
                 response: response
             }
-        ])
+        ]);
     }
 
     function addCommand({signature, className, description, scheduleCron}) {
@@ -140,7 +140,7 @@ export function SchemeDesignerForm() {
                 description: description,
                 scheduleCron: scheduleCron
             }
-        ])
+        ]);
     }
 
     function addVendor({name, version}) {
@@ -152,8 +152,8 @@ export function SchemeDesignerForm() {
                 {
                     name: name,
                     version: version
-                }]
-        );
+                }
+            ]);
     }
 
     function appendSettingsPropertiesToPostData(formValues) {
@@ -172,10 +172,10 @@ export function SchemeDesignerForm() {
         formValues.routes = [];
         routes.forEach(route => {
             formValues.routes.push({
-               uri: route.uri,
-               method: route.method,
-               class: route.className,
-               response: route.response
+                uri: route.uri,
+                method: route.method,
+                class: route.className,
+                response: route.response
             });
         });
         return formValues;
@@ -351,7 +351,8 @@ export function SchemeDesignerForm() {
                                             className="form-check-input"
                                             name="handlers.callback"
                                         />
-                                        <label className="form-check-label" htmlFor="handlers.callback">Callback?</label>
+                                        <label className="form-check-label"
+                                               htmlFor="handlers.callback">Callback?</label>
                                     </div>
                                     <div className="form-check">
                                         <Field
@@ -400,7 +401,8 @@ export function SchemeDesignerForm() {
                                     </div>
                                     <div className="form-group">
                                         <label className="mt-1" htmlFor="handlers.status">Status?</label>
-                                        <Field id="handlers.status" name="handlers.status" as="select" multiple className="form-control">
+                                        <Field id="handlers.status" name="handlers.status" as="select" multiple
+                                               className="form-control">
                                             <option value="payment">payment</option>
                                             <option value="payout">payout</option>
                                             <option value="refund">refund</option>
@@ -408,143 +410,154 @@ export function SchemeDesignerForm() {
                                     </div>
 
                                     {!values.card_method &&
-                                        <>
-                                            <h5>Wallet</h5>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.payment"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.payment"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.payment">Payment?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.field_md"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.field_md"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.field_md">Field MD?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.field_order_id"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.field_order_id"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.field_order_id">Field Order ID?</label>
-                                            </div>
-                                        </>
+                                    <>
+                                        <h5>Wallet</h5>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.payment"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.payment"
+                                            />
+                                            <label className="form-check-label"
+                                                   htmlFor="handlers.payment">Payment?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.field_md"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.field_md"
+                                            />
+                                            <label className="form-check-label" htmlFor="handlers.field_md">Field
+                                                MD?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.field_order_id"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.field_order_id"
+                                            />
+                                            <label className="form-check-label" htmlFor="handlers.field_order_id">Field
+                                                Order ID?</label>
+                                        </div>
+                                    </>
                                     }
 
                                     {values.card_method &&
-                                        <>
-                                            <h5>Card</h5>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.authorization"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.authorization"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.authorization">Authorization?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.capture"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.capture"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.capture">Capture?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.pares"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.pares"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.pares">Pares?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.recurring"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.recurring"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.recurring">Recurring?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.recurring_continue"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.recurring_continue"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.recurring_continue">Recurring Continue?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.recurring_threed_redirect"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.recurring_threed_redirect"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.recurring_threed_redirect">Recurring Threed Redirect?</label>
-                                            </div>
-                                            <div className="form-check">
-                                                <Field
-                                                    id="handlers.threed_redirect"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    name="handlers.threed_redirect"
-                                                />
-                                                <label className="form-check-label" htmlFor="handlers.threed_redirect">Threed Redirect?</label>
-                                            </div>
-                                        </>
+                                    <>
+                                        <h5>Card</h5>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.authorization"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.authorization"
+                                            />
+                                            <label className="form-check-label"
+                                                   htmlFor="handlers.authorization">Authorization?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.capture"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.capture"
+                                            />
+                                            <label className="form-check-label"
+                                                   htmlFor="handlers.capture">Capture?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.pares"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.pares"
+                                            />
+                                            <label className="form-check-label" htmlFor="handlers.pares">Pares?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.recurring"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.recurring"
+                                            />
+                                            <label className="form-check-label"
+                                                   htmlFor="handlers.recurring">Recurring?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.recurring_continue"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.recurring_continue"
+                                            />
+                                            <label className="form-check-label" htmlFor="handlers.recurring_continue">Recurring
+                                                Continue?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.recurring_threed_redirect"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.recurring_threed_redirect"
+                                            />
+                                            <label className="form-check-label"
+                                                   htmlFor="handlers.recurring_threed_redirect">Recurring Threed
+                                                Redirect?</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field
+                                                id="handlers.threed_redirect"
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name="handlers.threed_redirect"
+                                            />
+                                            <label className="form-check-label" htmlFor="handlers.threed_redirect">Threed
+                                                Redirect?</label>
+                                        </div>
+                                    </>
                                     }
 
                                     <hr/>
 
                                     {isSettingsSet && settingsProperties.length > 0 &&
-                                        <div id="settingsProperties" className="mt-4">
-                                            <h4 className="font-weight-bold">Settings properties</h4>
-                                            <SettingsProperties settingsProperties={settingsProperties} onRemoveSettingsProperty={removeSettingsProperty}/>
-                                            <hr/>
-                                        </div>
+                                    <div id="settingsProperties" className="mt-4">
+                                        <h4 className="font-weight-bold">Settings properties</h4>
+                                        <SettingsProperties settingsProperties={settingsProperties}
+                                                            onRemoveSettingsProperty={removeSettingsProperty}/>
+                                        <hr/>
+                                    </div>
                                     }
                                     {isRoutesSet && routes.length > 0 &&
-                                        <div id="routes" className="mt-4">
-                                            <h4 className="font-weight-bold">Routes</h4>
-                                            <Routes routes={routes} onRemoveRoute={removeRoute} />
-                                            <hr/>
-                                        </div>
+                                    <div id="routes" className="mt-4">
+                                        <h4 className="font-weight-bold">Routes</h4>
+                                        <Routes routes={routes} onRemoveRoute={removeRoute}/>
+                                        <hr/>
+                                    </div>
                                     }
                                     {isExRoutesSet && exRoutes.length > 0 &&
-                                        <div id="exRoutes" className="mt-4">
-                                            <h4 className="font-weight-bold">Ex-routes</h4>
-                                            <ExRoutes exRoutes={exRoutes} onRemoveExRoute={removeExRoute} />
-                                            <hr/>
-                                        </div>
+                                    <div id="exRoutes" className="mt-4">
+                                        <h4 className="font-weight-bold">Ex-routes</h4>
+                                        <ExRoutes exRoutes={exRoutes} onRemoveExRoute={removeExRoute}/>
+                                        <hr/>
+                                    </div>
                                     }
                                     {isCommandsSet && commands.length > 0 &&
-                                        <div id="commands" className="mt-4">
-                                            <h4 className="font-weight-bold">Commands</h4>
-                                            <Commands commands={commands} onRemoveCommand={removeCommand} />
-                                            <hr/>
-                                        </div>
+                                    <div id="commands" className="mt-4">
+                                        <h4 className="font-weight-bold">Commands</h4>
+                                        <Commands commands={commands} onRemoveCommand={removeCommand}/>
+                                        <hr/>
+                                    </div>
                                     }
                                     {isVendorsSet && vendors.length > 0 &&
-                                        <div id="vendors" className="mt-4">
-                                            <h4 className="font-weight-bold">Vendors</h4>
-                                            <Vendors vendors={vendors} onRemoveVendor={removeVendor} />
-                                            <hr/>
-                                        </div>
+                                    <div id="vendors" className="mt-4">
+                                        <h4 className="font-weight-bold">Vendors</h4>
+                                        <Vendors vendors={vendors} onRemoveVendor={removeVendor}/>
+                                        <hr/>
+                                    </div>
                                     }
 
                                     <button type="submit" className="mt-4 mb-4 btn btn-primary btn-lg">Build</button>
@@ -561,7 +574,7 @@ export function SchemeDesignerForm() {
                                     }
                                 </button>
                                 {isSettingsSet &&
-                                    <SettingsPropertyCreationForm onAddProperty={addSettingsProperty}/>
+                                <SettingsPropertyCreationForm onAddProperty={addSettingsProperty}/>
                                 }
 
                                 <button type="button"
@@ -573,7 +586,7 @@ export function SchemeDesignerForm() {
                                     }
                                 </button>
                                 {isRoutesSet &&
-                                    <RouteCreationForm onAddRoute={addRoute}/>
+                                <RouteCreationForm onAddRoute={addRoute}/>
                                 }
 
                                 <button type="button"
@@ -585,7 +598,7 @@ export function SchemeDesignerForm() {
                                     }
                                 </button>
                                 {isExRoutesSet &&
-                                    <ExRouteCreationForm onAddExRoute={addExRoute}/>
+                                <ExRouteCreationForm onAddExRoute={addExRoute}/>
                                 }
 
                                 <button type="button"
@@ -597,7 +610,7 @@ export function SchemeDesignerForm() {
                                     }
                                 </button>
                                 {isCommandsSet &&
-                                    <CommandCreationForm onAddCommand={addCommand}/>
+                                <CommandCreationForm onAddCommand={addCommand}/>
                                 }
 
                                 <button type="button"
@@ -609,7 +622,7 @@ export function SchemeDesignerForm() {
                                     }
                                 </button>
                                 {isVendorsSet &&
-                                    <VendorCreationForm onAddVendor={addVendor}/>
+                                <VendorCreationForm onAddVendor={addVendor}/>
                                 }
 
                             </div>

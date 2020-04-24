@@ -2,7 +2,7 @@ import React from "react";
 import {Field, Form, Formik} from "formik";
 import {CommandValidationSchema} from '../validators/CommandValidationSchema';
 
-export default function CommandCreationForm(props) {
+export default function CommandCreationForm({onAddCommand}) {
     return (
         <div>
             <Formik
@@ -13,7 +13,7 @@ export default function CommandCreationForm(props) {
                     scheduleCron: '',
                 }}
                 validationSchema={CommandValidationSchema}
-                onSubmit={command => props.onAddCommand(command)}
+                onSubmit={command => onAddCommand(command)}
             >
                 {({errors, touched}) => (
                     <>

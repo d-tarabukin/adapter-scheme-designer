@@ -2,7 +2,7 @@ import React from "react";
 import {Field, Form, Formik} from "formik";
 import {VendorValidationSchema} from '../validators/VendorValidationSchema';
 
-export default function VendorCreationForm(props) {
+export default function VendorCreationForm({onAddVendor}) {
     return (
         <div>
             <Formik
@@ -11,7 +11,7 @@ export default function VendorCreationForm(props) {
                     version: '',
                 }}
                 validationSchema={VendorValidationSchema}
-                onSubmit={vendor => props.onAddVendor(vendor)}
+                onSubmit={vendor => onAddVendor(vendor)}
             >
                 {({errors, touched}) => (
                     <>

@@ -2,7 +2,7 @@ import React from "react";
 import {Field, Form, Formik} from "formik";
 import {ExRouteValidationSchema} from '../validators/ExRouteValidationSchema';
 
-export default function ExRouteCreationForm(props) {
+export default function ExRouteCreationForm({addExRoute}) {
     return (
         <div>
             <Formik
@@ -13,7 +13,7 @@ export default function ExRouteCreationForm(props) {
                     response: '',
                 }}
                 validationSchema={ExRouteValidationSchema}
-                onSubmit={exRoute => props.onAddExRoute(exRoute)}
+                onSubmit={exRoute => addExRoute(exRoute)}
             >
                 {({errors, touched}) => (
                     <>

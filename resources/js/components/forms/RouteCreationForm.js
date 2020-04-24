@@ -2,7 +2,7 @@ import React from "react";
 import {Field, Form, Formik} from "formik";
 import {RouteValidationSchema} from '../validators/RouteValidationSchema';
 
-export default function RoutesCreationForm(props) {
+export default function RoutesCreationForm({onAddRoute}) {
     return (
         <div>
             <Formik
@@ -13,7 +13,7 @@ export default function RoutesCreationForm(props) {
                     response: '',
                 }}
                 validationSchema={RouteValidationSchema}
-                onSubmit={route => props.onAddRoute(route)}
+                onSubmit={route => onAddRoute(route)}
             >
                 {({errors, touched}) => (
                     <>
