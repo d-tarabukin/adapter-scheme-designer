@@ -23,5 +23,5 @@ export default function Routes({routes, onRemoveRoute}) {
                 </div>
             ))}
         </div>
-    )
+    );
 }

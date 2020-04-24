@@ -23,5 +23,5 @@ export default function Commands({commands, onRemoveCommand}) {
                 </div>
             ))}
         </div>
-    )
+    );
 }

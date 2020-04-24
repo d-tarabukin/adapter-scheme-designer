@@ -23,5 +23,5 @@ export default function ExRoutes({exRoutes, onRemoveExRoute}) {
                 </div>
             ))}
         </div>
-    )
+    );
 }

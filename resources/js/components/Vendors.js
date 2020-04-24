@@ -15,5 +15,5 @@ export default function Vendors({vendors, onRemoveVendor}) {
                 </div>
             ))}
         </div>
-    )
+    );
 }
