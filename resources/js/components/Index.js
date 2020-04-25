@@ -25,6 +25,7 @@ export function SchemeDesignerForm() {
     const [exRoutes, setExRoutes] = useState([]);
     const [commands, setCommands] = useState([]);
     const [vendors, setVendors] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formsToggle, setFormsToggle] = useState({
         settingsProperties: false,
         routes: false,
@@ -238,7 +239,8 @@ export function SchemeDesignerForm() {
 
     async function handleSubmit(values) {
         // TODO: remove empty fields before submit?
-        // TODO: make preloader
+        setIsSubmitting(true);
+
         let requestData = {...values};
 
         if (settingsProperties.length > 0) requestData = appendSettingsPropertiesToPostData(requestData);
@@ -253,6 +255,8 @@ export function SchemeDesignerForm() {
             data: JSON.stringify(requestData),
             headers: {'Content-Type': 'application/json'}
         });
+
+        setIsSubmitting(false);
 
         let fileName = response.headers['content-disposition'].match(/(?<=filename=).*/)[0];
         saveAs(new File([response.data], fileName, {type: 'text/vnd.yaml'}));
@@ -525,7 +529,7 @@ export function SchemeDesignerForm() {
                                     </div>
                                     }
 
-                                    <button type="submit" className="mt-4 mb-4 btn btn-primary btn-lg">Build</button>
+                                    <button type="submit" className={"mt-4 mb-4 btn btn-primary btn-lg " + (isSubmitting ? "btn-warning" : "")}>{isSubmitting ? "Building..." : "Build"}</button>
                                 </Form>
                             </div>
                             <div className="col-md-4">
