@@ -23,13 +23,10 @@
     padding-left: 1rem;
     list-style-type: square;
 }
-.property-group li:first-child {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 .property-group li:first-child h5 {
     margin: 0;
     font-weight: bold;
+}
+.btn-remove {
+    float: right;
 }

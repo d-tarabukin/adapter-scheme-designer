@@ -20,16 +20,18 @@ import {saveAs} from 'file-saver';
 // TODO: improve uri and other validation
 
 export function SchemeDesignerForm() {
-    const [isSettingsSet, enableSettings] = useState(false);
     const [settingsProperties, setSettingsProperties] = useState([]);
-    const [isRoutesSet, enableRoutes] = useState(false);
     const [routes, setRoutes] = useState([]);
-    const [isExRoutesSet, enableExRoutes] = useState(false);
     const [exRoutes, setExRoutes] = useState([]);
-    const [isCommandsSet, enableCommands] = useState(false);
     const [commands, setCommands] = useState([]);
-    const [isVendorsSet, enableVendors] = useState(false);
     const [vendors, setVendors] = useState([]);
+    const [formsToggle, setFormsToggle] = useState({
+        settingsProperties: false,
+        routes: false,
+        exRoutes: false,
+        commands: false,
+        vendors: false,
+    });
     const [initialValues, setInitialValues] = useState({
         method: '',
         version: '',
@@ -59,43 +61,28 @@ export function SchemeDesignerForm() {
         }
     });
 
-    function toggleSettings() {
-        enableSettings(!isSettingsSet);
-        if (settingsProperties.length > 0) setSettingsProperties([]);
-    }
-
-    function toggleRoutes() {
-        enableRoutes(!isRoutesSet);
-        if (routes.length > 0) setRoutes([]);
-    }
-
-    function toggleExRoutes() {
-        enableExRoutes(!isExRoutesSet);
-        if (exRoutes.length > 0) setExRoutes([]);
-    }
-
-    function toggleCommands() {
-        enableCommands(!isCommandsSet);
-        if (commands.length > 0) setCommands([]);
-    }
-
-    function toggleVendors() {
-        enableVendors(!isVendorsSet);
-        if (vendors.length > 0) setVendors([]);
+    function toggleForms(newFormToOpen) {
+        setFormsToggle(prevState => {
+            let newFormsToggle = {...prevState};
+            Object.entries(newFormsToggle).forEach(([key, value]) => {
+                newFormsToggle[key] = value === true ? false : key === newFormToOpen;
+            });
+            return newFormsToggle;
+        });
     }
 
     function addSettingsProperty({name, types, options, defaultValue}) {
         if (settingsProperties.find(property => property.name === name)) return;
 
         setSettingsProperties([
-                ...settingsProperties,
-                {
-                    name: name,
-                    type: types.join(),
-                    options: options,
-                    default: defaultValue
-                }
-            ]);
+            ...settingsProperties,
+            {
+                name: name,
+                type: types.join(),
+                options: options,
+                default: defaultValue
+            }
+        ]);
     }
 
     function addRoute({uri, method, className, response}) {
@@ -146,12 +133,12 @@ export function SchemeDesignerForm() {
         if (vendors.find(vendor => vendor.name === name)) return;
 
         setVendors([
-                ...vendors,
-                {
-                    name: name,
-                    version: version
-                }
-            ]);
+            ...vendors,
+            {
+                name: name,
+                version: version
+            }
+        ]);
     }
 
     function appendSettingsPropertiesToPostData(formValues) {
@@ -232,26 +219,6 @@ export function SchemeDesignerForm() {
     function removeVendor(name) {
         setVendors(vendors.filter(vendor => vendor.name !== name));
     }
-
-    useEffect(() => {
-        if (settingsProperties.length === 0) enableSettings(false);
-    }, [settingsProperties]);
-
-    useEffect(() => {
-        if (routes.length === 0) enableRoutes(false);
-    }, [routes]);
-
-    useEffect(() => {
-        if (exRoutes.length === 0) enableExRoutes(false);
-    }, [exRoutes]);
-
-    useEffect(() => {
-        if (commands.length === 0) enableCommands(false);
-    }, [commands]);
-
-    useEffect(() => {
-        if (vendors.length === 0) enableVendors(false);
-    }, [vendors]);
 
     function handleOnCardMethodChange(isCardMethod, values) {
         if (isCardMethod) {
@@ -521,7 +488,7 @@ export function SchemeDesignerForm() {
 
                                     <hr/>
 
-                                    {isSettingsSet && settingsProperties.length > 0 &&
+                                    {settingsProperties.length > 0 &&
                                     <div id="settingsProperties" className="mt-4">
                                         <h4 className="font-weight-bold">Settings properties</h4>
                                         <SettingsProperties settingsProperties={settingsProperties}
@@ -529,28 +496,28 @@ export function SchemeDesignerForm() {
                                         <hr/>
                                     </div>
                                     }
-                                    {isRoutesSet && routes.length > 0 &&
+                                    {routes.length > 0 &&
                                     <div id="routes" className="mt-4">
                                         <h4 className="font-weight-bold">Routes</h4>
                                         <Routes routes={routes} onRemoveRoute={removeRoute}/>
                                         <hr/>
                                     </div>
                                     }
-                                    {isExRoutesSet && exRoutes.length > 0 &&
+                                    {exRoutes.length > 0 &&
                                     <div id="exRoutes" className="mt-4">
                                         <h4 className="font-weight-bold">Ex-routes</h4>
                                         <ExRoutes exRoutes={exRoutes} onRemoveExRoute={removeExRoute}/>
                                         <hr/>
                                     </div>
                                     }
-                                    {isCommandsSet && commands.length > 0 &&
+                                    {commands.length > 0 &&
                                     <div id="commands" className="mt-4">
                                         <h4 className="font-weight-bold">Commands</h4>
                                         <Commands commands={commands} onRemoveCommand={removeCommand}/>
                                         <hr/>
                                     </div>
                                     }
-                                    {isVendorsSet && vendors.length > 0 &&
+                                    {vendors.length > 0 &&
                                     <div id="vendors" className="mt-4">
                                         <h4 className="font-weight-bold">Vendors</h4>
                                         <Vendors vendors={vendors} onRemoveVendor={removeVendor}/>
@@ -564,62 +531,62 @@ export function SchemeDesignerForm() {
                             <div className="col-md-4">
 
                                 <button type="button"
-                                        className={"mb-4 btn btn-block " + (isSettingsSet ? "btn-danger" : "btn-secondary")}
-                                        onClick={toggleSettings}>
-                                    {isSettingsSet
-                                        ? <span>Remove Settings</span>
+                                        className={"mb-4 btn btn-block " + (formsToggle.settingsProperties ? "btn-danger" : "btn-secondary")}
+                                        onClick={() => toggleForms('settingsProperties')}>
+                                    {formsToggle.settingsProperties
+                                        ? <span>Close Settings</span>
                                         : <span>Add Settings</span>
                                     }
                                 </button>
-                                {isSettingsSet &&
+                                {formsToggle.settingsProperties &&
                                 <SettingsPropertyCreationForm onAddProperty={addSettingsProperty}/>
                                 }
 
                                 <button type="button"
-                                        className={"mb-4 btn btn-block " + (isRoutesSet ? "btn-danger" : "btn-secondary")}
-                                        onClick={toggleRoutes}>
-                                    {isRoutesSet
-                                        ? <span>Remove Routes</span>
+                                        className={"mb-4 btn btn-block " + (formsToggle.routes ? "btn-danger" : "btn-secondary")}
+                                        onClick={() => toggleForms('routes')}>
+                                    {formsToggle.routes
+                                        ? <span>Close Routes</span>
                                         : <span>Add Routes</span>
                                     }
                                 </button>
-                                {isRoutesSet &&
+                                {formsToggle.routes &&
                                 <RouteCreationForm onAddRoute={addRoute}/>
                                 }
 
                                 <button type="button"
-                                        className={"mb-4 btn btn-block " + (isExRoutesSet ? "btn-danger" : "btn-secondary")}
-                                        onClick={toggleExRoutes}>
-                                    {isExRoutesSet
-                                        ? <span>Remove Ex-routes</span>
+                                        className={"mb-4 btn btn-block " + (formsToggle.exRoutes ? "btn-danger" : "btn-secondary")}
+                                        onClick={() => toggleForms('exRoutes')}>
+                                    {formsToggle.exRoutes
+                                        ? <span>Close Ex-routes</span>
                                         : <span>Add Ex-routes</span>
                                     }
                                 </button>
-                                {isExRoutesSet &&
+                                {formsToggle.exRoutes &&
                                 <ExRouteCreationForm onAddExRoute={addExRoute}/>
                                 }
 
                                 <button type="button"
-                                        className={"mb-4 btn btn-block " + (isCommandsSet ? "btn-danger" : "btn-secondary")}
-                                        onClick={toggleCommands}>
-                                    {isCommandsSet
-                                        ? <span>Remove Commands</span>
+                                        className={"mb-4 btn btn-block " + (formsToggle.commands ? "btn-danger" : "btn-secondary")}
+                                        onClick={() => toggleForms('commands')}>
+                                    {formsToggle.commands
+                                        ? <span>Close Commands</span>
                                         : <span>Add Commands</span>
                                     }
                                 </button>
-                                {isCommandsSet &&
+                                {formsToggle.commands &&
                                 <CommandCreationForm onAddCommand={addCommand}/>
                                 }
 
                                 <button type="button"
-                                        className={"mb-4 btn btn-block " + (isVendorsSet ? "btn-danger" : "btn-secondary")}
-                                        onClick={toggleVendors}>
-                                    {isVendorsSet
-                                        ? <span>Remove Vendors</span>
+                                        className={"mb-4 btn btn-block " + (formsToggle.vendors ? "btn-danger" : "btn-secondary")}
+                                        onClick={() => toggleForms('vendors')}>
+                                    {formsToggle.vendors
+                                        ? <span>Close Vendors</span>
                                         : <span>Add Vendors</span>
                                     }
                                 </button>
-                                {isVendorsSet &&
+                                {formsToggle.vendors &&
                                 <VendorCreationForm onAddVendor={addVendor}/>
                                 }
 

@@ -8,10 +8,9 @@ export default function ExRoutes({exRoutes, onRemoveExRoute}) {
             {exRoutes.map((exRoute, index) => (
                 <div key={uuid()}>
                     <ul className="property-group">
-                        <li><h5>Ex-route {index + 1}</h5>
-                            <button className="btn btn-danger" onClick={() => onRemoveExRoute(index)}>X</button>
+                        <li><span>Uri: {exRoute.uri}</span>
+                            <button className="btn-remove btn btn-danger" onClick={() => onRemoveExRoute(index)}>X</button>
                         </li>
-                        <li>Uri: {exRoute.uri}</li>
                         {exRoute.method &&
                         <li>Method: {exRoute.method}</li>
                         }

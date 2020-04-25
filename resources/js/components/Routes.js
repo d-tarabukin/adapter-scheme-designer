@@ -8,10 +8,9 @@ export default function Routes({routes, onRemoveRoute}) {
             {routes.map((route, index) => (
                 <div key={uuid()}>
                     <ul className="property-group">
-                        <li><h5>Route {index + 1}</h5>
-                            <button className="btn btn-danger" onClick={() => onRemoveRoute(index)}>X</button>
+                        <li><span>Uri: {route.uri}</span>
+                            <button className="btn-remove btn btn-danger" onClick={() => onRemoveRoute(index)}>X</button>
                         </li>
-                        <li>Uri: {route.uri}</li>
                         {route.method &&
                         <li>Method: {route.method}</li>
                         }

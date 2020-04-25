@@ -7,8 +7,8 @@ export default function Vendors({vendors, onRemoveVendor}) {
             {vendors.map(vendor => (
                 <div key={uuid()}>
                     <ul className="property-group">
-                        <li><h5>{vendor.name}</h5>
-                            <button className="btn btn-danger" onClick={() => onRemoveVendor(vendor.name)}>X</button>
+                        <li><span>Name: {vendor.name}</span>
+                            <button className="btn-remove btn btn-danger" onClick={() => onRemoveVendor(vendor.name)}>X</button>
                         </li>
                         <li>Version: {vendor.version}</li>
                     </ul>
