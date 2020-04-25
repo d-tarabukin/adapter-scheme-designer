@@ -239,7 +239,7 @@ export function SchemeDesignerForm() {
     async function handleSubmit(values) {
         // TODO: remove empty fields before submit?
         // TODO: make preloader
-        let requestData = Object.assign({}, values);
+        let requestData = {...values};
 
         if (settingsProperties.length > 0) requestData = appendSettingsPropertiesToPostData(requestData);
         if (routes.length > 0) requestData = appendRoutesToPostData(requestData);
