@@ -529,7 +529,7 @@ export function SchemeDesignerForm() {
                                     </div>
                                     }
 
-                                    <button type="submit" className={"mt-4 mb-4 btn btn-primary btn-lg " + (isSubmitting ? "btn-warning" : "")}>{isSubmitting ? "Building..." : "Build"}</button>
+                                    <button disabled={isSubmitting} type="submit" className={"mt-4 mb-4 btn btn-primary btn-lg " + (isSubmitting ? "btn-warning" : "")}>{isSubmitting ? "Building..." : "Build"}</button>
                                 </Form>
                             </div>
                             <div className="col-md-4">
